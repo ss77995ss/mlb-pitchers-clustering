@@ -52,6 +52,6 @@ def matchup(batter_id):
     result = batter_df[['woba_value', 'babip_value', 'iso_value', 'cluster']] \
         .groupby('cluster').agg({'woba_value': 'mean', 'babip_value': 'mean', 'iso_value': 'mean', 'cluster': 'size'}) \
         .rename(columns={'woba_value':'woba', 'babip_value': 'babip', 'iso_value': 'iso', 'cluster':'count'}) \
-        .merge(pitching_types['cluster'].value_counts(), left_index=True, right_index=True)
+        .reset_index()
     return result.to_dict('r')
 
